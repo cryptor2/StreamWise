@@ -1,4 +1,4 @@
-package com.prince.videostreaming.user_service;
+package com.prince.videostreaming.auth_api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
 @EntityScan(basePackages = "com.prince.common.data.entities")
-public class UserServiceApplication {
+public class AuthApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UserServiceApplication.class, args);
+		SpringApplication.run(AuthApiApplication.class, args);
 	}
 
 }

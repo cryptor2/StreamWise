@@ -1,4 +1,4 @@
-package com.prince.video_service.config;
+package com.prince.videostreaming.user_service.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
