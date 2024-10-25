@@ -1,11 +1,13 @@
 package com.prince.videostreaming.gateway.filter;
 
-import com.prince.videostreaming.gateway.utils.JwtUtil;
+import com.prince.videostreaming.gateway.feign.FeignClientAuthService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.http.HttpHeaders;
 
@@ -14,15 +16,13 @@ import org.springframework.http.HttpHeaders;
 public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
 
     private final RouteValidator validator;
-    private final UserDetailsService userDetailsService;
-
-    private JwtUtil jwtUtil;
+    private final FeignClientAuthService feignClientAuthService;
 
     @Autowired
-    public AuthenticationFilter(UserDetailsService userDetailsService, RouteValidator routeValidator) {
+    public AuthenticationFilter(RouteValidator routeValidator, @Lazy FeignClientAuthService feignClientAuthService) {
         super(Config.class);
-        this.userDetailsService =userDetailsService;
         validator = routeValidator;
+        this.feignClientAuthService = feignClientAuthService;
     }
 
     @Override
@@ -39,13 +39,13 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                     authHeader = authHeader.substring(7);
                 }
                 try {
-
-                    final String userEmail = jwtUtil.extractUsername(authHeader);
-                    UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail);
-                    jwtUtil.validateToken(authHeader, userDetails);
+                    ResponseEntity<String> res = feignClientAuthService.validateToken(authHeader);
+                    if (res.getStatusCode() != HttpStatusCode.valueOf(200)) {
+                        System.out.println("invalid access...!");
+                        throw new RuntimeException("un authorized access to application");
+                    }
                 } catch (Exception e) {
-                    System.out.println("invalid access...!");
-                    throw new RuntimeException("un authorized access to application");
+                    System.out.println("Error from AuthenticaionFilter... !" + e.getMessage());
                 }
             }
             return chain.filter(exchange);
