@@ -1,0 +1,27 @@
+server:
+  port: 8085
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/videoStreaming
+    username: root
+    password: 9135
+  jpa:
+    hibernate:
+    open-in-view: false
+  main:
+    banner-mode: off
+
+video:
+  path: /videos
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+logging:
+  level:
+    root: warn

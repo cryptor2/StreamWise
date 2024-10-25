@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/videoStreaming
+    username: root
+    password: 9135
+  jpa:
+    open-in-view: false
+  main:
+    banner-mode: off
+
+security:
+  jwt:
+    secret-key: ec0e41758055b9a9932796365ae3e9b160c673f61df19448b0ad46fe7b881220ce83291baa85d07ea642d77b9d96487b7c157de0f73f5e4f26684e8417fdae6c50addcda4e743c93b02676dc6428625d4fab9666281446521ad2242ca3720d9faaf1eeb3250977264e4beafec6894e5ce2fcb90ac9b305d7e4c939fa8ee9492462a57815afc71b3db972b5cd94dbb4250941192b9b1859d4a83b5d67a7bd66e77adf4f6806e5f1ca06d89758c36049545fd72b07adef5850bcb5b5776915f3640c90857edae46c63765c8b410238c6bd5ff335b5530f26293dbaa70e43eb97f04b0d529153c0f06a7b72d511aa3503052ee8ecd262405b2fe7f25a6084d06ace
+    expiration-time: 3600000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+logging:
+  level:
+    root: warn
