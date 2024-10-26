@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
-@FeignClient(url = "http://localhost:8084/", name = "video-service")
+@FeignClient(name = "VIDEO-SERVICE")
 public interface FeignClientVideoService {
     @PostMapping(value = "/upload-video", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     ResponseEntity<UploadResponseDto> videoUpload(

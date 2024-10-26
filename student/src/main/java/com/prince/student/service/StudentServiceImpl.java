@@ -7,7 +7,7 @@ import com.prince.common.data.entities.Course;
 import com.prince.common.data.entities.CourseRegistration;
 import com.prince.common.data.entities.User;
 import com.prince.data.commons.exceptions.ResourNotFoundException;
-import com.prince.student.Feign.FeignClientAuthApi;
+import com.prince.student.Feign.FeignClientUserService;
 import com.prince.student.Feign.FeignClientCourse;
 import com.prince.student.repository.CourseRegistrationRepository;
 import jakarta.transaction.Transactional;
@@ -24,11 +24,11 @@ public class StudentServiceImpl implements StudentService{
     private final ModelMapper modelMapper;
 
     CourseRegistrationRepository courseRegistrationRepository;
-    private final FeignClientAuthApi feignClientAuthApi;
+    private final FeignClientUserService feignClientAuthApi;
     private final FeignClientCourse feignClientCourse;
 
     @Autowired
-    public StudentServiceImpl(CourseRegistrationRepository courseRegistrationRepository, ModelMapper modelMapper, FeignClientAuthApi feignClientAuthApi, FeignClientCourse feignClientCourse) {
+    public StudentServiceImpl(CourseRegistrationRepository courseRegistrationRepository, ModelMapper modelMapper, FeignClientUserService feignClientAuthApi, FeignClientCourse feignClientCourse) {
         this.courseRegistrationRepository = courseRegistrationRepository;
         this.modelMapper = modelMapper;
         this.feignClientAuthApi = feignClientAuthApi;

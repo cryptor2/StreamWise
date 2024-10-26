@@ -3,7 +3,7 @@ package com.prince.instructor.service;
 import com.prince.common.data.entities.Course;
 import com.prince.data.commons.exceptions.ResourNotFoundException;
 import com.prince.common.data.entities.User;
-import com.prince.instructor.Feign.FeignClientAuthApi;
+import com.prince.instructor.Feign.FeignClientUserService;
 import com.prince.instructor.Feign.FeignClientCourse;
 import com.prince.instructor.Feign.FeignClientVideoService;
 import com.prince.common.data.dtos.*;
@@ -20,13 +20,13 @@ import java.util.Objects;
 @Service
 public class InstructorServiceImpl implements InstructorService {
     private final ModelMapper modelMapper;
-    private final FeignClientAuthApi feignClientAuthApi;
+    private final FeignClientUserService feignClientAuthApi;
     private final FeignClientCourse feignClientCourse;
 
     private final FeignClientVideoService feignClientVideoService;
 //
 
-    public InstructorServiceImpl(ModelMapper modelMapper, FeignClientAuthApi feignClientAuthApi, FeignClientCourse feignClientCourse, FeignClientVideoService feignClientVideoService) {
+    public InstructorServiceImpl(ModelMapper modelMapper, FeignClientUserService feignClientAuthApi, FeignClientCourse feignClientCourse, FeignClientVideoService feignClientVideoService) {
         this.modelMapper = modelMapper;
         this.feignClientAuthApi = feignClientAuthApi;
         this.feignClientCourse = feignClientCourse;
