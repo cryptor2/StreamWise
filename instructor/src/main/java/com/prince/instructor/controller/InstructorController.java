@@ -19,30 +19,30 @@ public class InstructorController {
         this.instructorService = instructorService;
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<ResponseInstructorDto> getInstructorDetails(@PathVariable Long userId){
-        ResponseInstructorDto instructorDto = instructorService.findInstructorDetails(userId);
-        return new ResponseEntity<>(instructorDto, HttpStatus.OK);
-    }
+//    @GetMapping("/{userId}")
+//    public ResponseEntity<ResponseInstructorDto> getInstructorDetails(@PathVariable Long userId){
+//        ResponseInstructorDto instructorDto = instructorService.findInstructorDetails(userId);
+//        return new ResponseEntity<>(instructorDto, HttpStatus.OK);
+//    }
 
-    @PostMapping("/createCourse/{userId}")
-    public ResponseEntity<CourseDetailsDto> createCourse(CreateCourseDto courseDto, @PathVariable Long userId){
-        return instructorService.createCourse(courseDto, userId);
-
-    }
-
-    @PostMapping("/uploadVideo/{userId}/{courseId}")
-    public ResponseEntity<UploadResponseDto> videoUpload(UploadVideoDto uploadVideoDto, MultipartFile file, @PathVariable Long userId, @PathVariable Long courseId ) {
-        return instructorService.uploadVideo(uploadVideoDto,file,userId,courseId);
-    }
-
-    @DeleteMapping("/deleteCourse/{userId}/{courseId}")
-    public ResponseEntity<String> deleteCourse(@PathVariable Long userId, @PathVariable Long courseId){
-        return instructorService.deleteCourse(userId,courseId);
-    }
-
-    @DeleteMapping("/deleteAllCourse/{userId}")
-    public ResponseEntity<Integer> deleteAllCourse(@PathVariable Long userId){
-        return instructorService.deleteAllCourse(userId);
-    }
+//    @PostMapping("/createCourse/{userId}")
+//    public ResponseEntity<CourseDetailsDto> createCourse(@RequestBody CreateCourseDto courseDto, @PathVariable Long userId){
+//        return instructorService.createCourse(courseDto, userId);
+//
+//    }
+//
+//    @PostMapping("/uploadVideo")
+//    public ResponseEntity<UploadResponseDto> videoUpload(UploadVideoDto uploadVideoDto, MultipartFile file) {
+//        return instructorService.uploadVideo(uploadVideoDto,file);
+//    }
+//
+//    @DeleteMapping("/deleteCourse/{userId}/{courseId}")
+//    public ResponseEntity<String> deleteCourse(@PathVariable Long userId, @PathVariable Long courseId){
+//        return instructorService.deleteCourse(userId,courseId);
+//    }
+//
+//    @DeleteMapping("/deleteAllCourse/{userId}")
+//    public ResponseEntity<Integer> deleteAllCourse(@PathVariable Long userId){
+//        return instructorService.deleteAllCourse(userId);
+//    }
 }

@@ -12,4 +12,6 @@ import lombok.Setter;
 public class UploadVideoDto {
     private String videoTitle;
     private String videoDescription;
+    private Long userId;
+    private Long courseId;
 }

@@ -18,7 +18,6 @@ public interface FeignClientVideoService {
     @PostMapping(value = "/upload-video", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     ResponseEntity<UploadResponseDto> videoUpload(
             @RequestPart("uploadVideoDto") UploadVideoDto uploadVideoDto,
-            @RequestPart("file") MultipartFile file,
-            @RequestParam("courseId") Long courseId
+            @RequestPart("file") MultipartFile file
     );
 }

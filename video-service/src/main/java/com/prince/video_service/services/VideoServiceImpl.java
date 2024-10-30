@@ -14,6 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.multipart.MultipartFile;
 import com.prince.data.commons.exceptions.ResourNotFoundException;
 
@@ -60,9 +61,13 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     @Transactional
-    public UploadResponseDto saveVideo(UploadVideoDto uploadVideoDto, MultipartFile file, Long courseId) {
-        Course course = feignClientCourse.getCourseDetails(courseId).orElseThrow(()-> new ResourNotFoundException("Coruse", "coruseId", courseId));
-        return videoProcessing.videoProcessAndStore(uploadVideoDto, file, course);
+    public UploadResponseDto saveVideo(UploadVideoDto uploadVideoDto, MultipartFile file) {
+        Course course = feignClientCourse.getCourseDetails(uploadVideoDto.getCourseId()).getBody();
+        if (course.getUser().getId().equals(uploadVideoDto.getUserId())) {
+            return videoProcessing.videoProcessAndStore(uploadVideoDto, file, course);
+        } else {
+            throw new ResourceAccessException("Course not found or does not belong to the specified user.");
+        }
     }
 
     public List<VideoDetailsDto> getAllVideos() {

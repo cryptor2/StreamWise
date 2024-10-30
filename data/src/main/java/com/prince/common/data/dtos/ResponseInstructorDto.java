@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 public class ResponseInstructorDto {
-    private Long userId;
+    private Long instructorId;
     private String userName;
     private String email;
     List<CourseDetailsDto> courseList = new ArrayList<>();

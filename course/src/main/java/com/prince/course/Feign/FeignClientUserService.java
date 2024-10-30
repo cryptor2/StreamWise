@@ -1,4 +1,4 @@
-package com.prince.instructor.Feign;
+package com.prince.course.Feign;
 
 import com.prince.common.data.dtos.UserDto;
 import org.springframework.cloud.openfeign.FeignClient;

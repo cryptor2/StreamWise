@@ -33,6 +33,7 @@ public class UserService {
 
     public UserDto getUserDetails(Long userId) {
         Optional<User> user = Optional.ofNullable(userRepository.findById(userId).orElseThrow(() -> new ResourNotFoundException("auth", "userId", userId)));
+        System.out.println(user.toString());
         return modelMapper.map(user, UserDto.class);
     }
 }

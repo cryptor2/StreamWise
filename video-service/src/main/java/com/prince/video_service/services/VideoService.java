@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface VideoService {
-    UploadResponseDto saveVideo(UploadVideoDto uploadVideoDto, MultipartFile file, Long courseId);
+    UploadResponseDto saveVideo(UploadVideoDto uploadVideoDto, MultipartFile file);
 
     List<com.prince.data.commons.dtos.VideoDetailsDto> getAllVideos();
 

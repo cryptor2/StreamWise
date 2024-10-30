@@ -25,8 +25,8 @@ public class uploadVideoController {
 
 
     @PostMapping("/upload-video")
-    public ResponseEntity<UploadResponseDto> videoUpload(UploadVideoDto uploadVideoDto, MultipartFile file, Long courseId) {
-        UploadResponseDto res = videoService.saveVideo(uploadVideoDto, file, courseId);
+    public ResponseEntity<UploadResponseDto> videoUpload(UploadVideoDto uploadVideoDto, MultipartFile file) {
+        UploadResponseDto res = videoService.saveVideo(uploadVideoDto, file);
         return new ResponseEntity<UploadResponseDto>(res, HttpStatus.CREATED);
     }
 
