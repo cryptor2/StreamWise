@@ -6,12 +6,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class CourseDto {
+    private Long instructorId;
+    private Long courseId;
     private String courseName;
     private String courseDescription;
-    private User user;
+    private Date creationDate;
 }

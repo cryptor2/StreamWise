@@ -7,6 +7,7 @@ import com.prince.common.data.dtos.UploadVideoDto;
 import com.prince.video_service.services.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,15 +25,20 @@ public class uploadVideoController {
     }
 
 
-    @PostMapping("/upload-video")
-    public ResponseEntity<UploadResponseDto> videoUpload(UploadVideoDto uploadVideoDto, MultipartFile file) {
+    @PostMapping(value = "/upload-video", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<UploadResponseDto> uploadVideo(@RequestPart("uploadVideoDto") UploadVideoDto uploadVideoDto, @RequestPart("file") MultipartFile file) {
         UploadResponseDto res = videoService.saveVideo(uploadVideoDto, file);
-        return new ResponseEntity<UploadResponseDto>(res, HttpStatus.CREATED);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @GetMapping("/all-videos")
     public ResponseEntity<List<VideoDetailsDto>> getAllVideos() {
-        return new ResponseEntity<List<VideoDetailsDto>>(videoService.getAllVideos(), HttpStatus.OK);
+        return new ResponseEntity<>(videoService.getAllVideos(), HttpStatus.OK);
+    }
+
+    @GetMapping("/videos/course/{courseId}")
+    public ResponseEntity<List<VideoDetailsDto>> getCourseVideos(@PathVariable Long courseId){
+        return new ResponseEntity<>(videoService.getCourseVideos(courseId), HttpStatus.OK);
     }
 
     @GetMapping("/video/{id}")

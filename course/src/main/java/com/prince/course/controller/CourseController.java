@@ -1,6 +1,7 @@
 package com.prince.course.controller;
 
 import com.prince.common.data.dtos.CourseDetailsDto;
+import com.prince.common.data.dtos.CourseDto;
 import com.prince.common.data.dtos.CreateCourseDto;
 import com.prince.common.data.dtos.ResponseInstructorDto;
 import com.prince.common.data.entities.Course;
@@ -30,16 +31,11 @@ public class CourseController {
     }
 
     @GetMapping("/{courseId}")
-    public ResponseEntity<CourseDetailsDto> getCourseDetails(@PathVariable Long courseId){
-        CourseDetailsDto res = courseService.getCourseDetails(courseId);
-        return new ResponseEntity<>(res, HttpStatus.FOUND);
+    public ResponseEntity<CourseDto> getCourseDetails(@PathVariable Long courseId){
+        CourseDto res = courseService.getCourseDetails(courseId);
+        return new ResponseEntity<>(res, HttpStatus.OK);
    }
 
-    @GetMapping("/conf/{courseId}")
-    public ResponseEntity<Course> getCourse(@PathVariable Long courseId){
-        Course course = courseService.getCourse(courseId);
-        return new ResponseEntity<>(course, HttpStatus.FOUND);
-    }
 
     @GetMapping("/all-courses")
     public ResponseEntity<List<CourseDetailsDto>> getAllCourses(){

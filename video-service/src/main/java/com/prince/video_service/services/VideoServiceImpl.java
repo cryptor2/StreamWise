@@ -1,6 +1,8 @@
 package com.prince.video_service.services;
 
 
+import com.prince.common.data.dtos.CourseDetailsDto;
+import com.prince.common.data.dtos.CourseDto;
 import com.prince.common.data.dtos.UploadResponseDto;
 import com.prince.common.data.dtos.UploadVideoDto;
 import com.prince.common.data.entities.Course;
@@ -62,8 +64,9 @@ public class VideoServiceImpl implements VideoService {
     @Override
     @Transactional
     public UploadResponseDto saveVideo(UploadVideoDto uploadVideoDto, MultipartFile file) {
-        Course course = feignClientCourse.getCourseDetails(uploadVideoDto.getCourseId()).getBody();
-        if (course.getUser().getId().equals(uploadVideoDto.getUserId())) {
+        CourseDto courseDto = feignClientCourse.getCourseDetails(uploadVideoDto.getCourseId()).getBody();
+        if (courseDto.getInstructorId() != null && courseDto.getInstructorId().equals(uploadVideoDto.getUserId())) {
+            Course course = modelMapper.map(courseDto, Course.class);
             return videoProcessing.videoProcessAndStore(uploadVideoDto, file, course);
         } else {
             throw new ResourceAccessException("Course not found or does not belong to the specified user.");
@@ -74,6 +77,18 @@ public class VideoServiceImpl implements VideoService {
         List<Video> allVideos = videoRepository.findAll();
         List<VideoDetailsDto> videoDetails;
         videoDetails = allVideos.stream()
+                .map(video -> modelMapper.map(video, VideoDetailsDto.class))
+                .collect(Collectors.toList());
+        return videoDetails;
+    }
+
+    @Override
+    public List<VideoDetailsDto> getCourseVideos(Long courseId) {
+        CourseDto courseDto = feignClientCourse.getCourseDetails(courseId).getBody();
+        Course course = modelMapper.map(courseDto, Course.class);
+        List<Video> videos = videoRepository.findAllByCourse(course);
+        List<VideoDetailsDto> videoDetails;
+        videoDetails = videos.stream()
                 .map(video -> modelMapper.map(video, VideoDetailsDto.class))
                 .collect(Collectors.toList());
         return videoDetails;

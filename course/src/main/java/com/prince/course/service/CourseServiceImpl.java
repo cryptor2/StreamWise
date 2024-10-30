@@ -62,15 +62,13 @@ public class CourseServiceImpl implements CourseService{
         return responseInstructorDto;
     }
 
-    public CourseDetailsDto getCourseDetails(Long courseId){
+    public CourseDto getCourseDetails(Long courseId){
         Course course = courseRepository.findById(courseId).orElseThrow(() -> new ResourNotFoundException("Course", "courseId", courseId));
-        return modelMapper.map(course, CourseDetailsDto.class);
+        CourseDto courseDto = modelMapper.map(course, CourseDto.class);
+        courseDto.setInstructorId(course.getUser().getId());
+        return courseDto;
     }
 
-    @Override
-    public Course getCourse(Long courseId) {
-        return courseRepository.findById(courseId).orElseThrow(() -> new ResourNotFoundException("Course", "courseId", courseId));
-    }
 
     @Transactional
     public void deleteCourse(Long userId, Long courseId){

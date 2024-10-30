@@ -11,8 +11,7 @@ public interface CourseService {
     CourseDetailsDto createCourse(CreateCourseDto createCourseDto);
 
     ResponseInstructorDto getCourseByInstructor(Long userId);
-    CourseDetailsDto getCourseDetails(Long courseId);
-    Course getCourse(Long courseId);
+    CourseDto getCourseDetails(Long courseId);
     void deleteCourse(Long userId, Long courseId);
     Integer deleteCourseByUser(Long userId);
 
