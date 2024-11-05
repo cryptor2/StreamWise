@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.Optional;
 
 
-@FeignClient(url = "http://localhost:8081/", value = "course-client")
+@FeignClient(name = "COURSE")
 public interface FeignClientCourse {
     @GetMapping("/course/{courseId}")
     Optional<Course> getCourseDetails(@PathVariable Long courseId);

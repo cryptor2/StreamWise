@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
 
-@FeignClient(name = "USER-SERVICE", value = "auth-api-client")
+@FeignClient(name = "USER-SERVICE")
 public interface FeignClientUserService {
     @GetMapping("/users/{userId}")
     Optional<UserDto> userDetails(@PathVariable Long userId);

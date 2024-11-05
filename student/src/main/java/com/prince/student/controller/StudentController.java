@@ -18,16 +18,16 @@ public class StudentController {
     @GetMapping("/{userId}")
     public ResponseEntity<ResponseStudentDto> getStudentDetails(@PathVariable Long userId){
         ResponseStudentDto responseStudentDto = studentService.findStudentDetails(userId);
-        return new ResponseEntity<ResponseStudentDto>(responseStudentDto, HttpStatus.OK);
+        return new ResponseEntity<>(responseStudentDto, HttpStatus.OK);
     }
 
-    @PostMapping("/registerCourse/{userId}/{courseId}")
+    @PostMapping("/register/userid/{userId}/courseid/{courseId}")
     public ResponseEntity<String> registerCourse(@PathVariable Long userId, @PathVariable Long courseId) {
         String res = studentService.registerCourse(userId, courseId);
         return ResponseEntity.ok(res);
     }
 
-    @DeleteMapping("/removeCourse/{userId}/{courseId}")
+    @DeleteMapping("/remove/userid/{userId}/courseid/{courseId}")
     public ResponseEntity<String> removeCourseById(@PathVariable Long userId, @PathVariable Long courseId){
         String res = studentService.deleteCourseById(userId, courseId);
         return new ResponseEntity<>(res, HttpStatus.NOT_FOUND);

@@ -82,7 +82,7 @@ public class CourseServiceImpl implements CourseService{
 
     public Integer deleteCourseByUser(Long userId){
         User user = this.getUser(userId);
-        return courseRepository.deleteCourseByUser(user);
+        return courseRepository.deleteCoursesByUser(user);
     }
 
     public List<CourseDetailsDto> getAllCourses(){

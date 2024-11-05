@@ -1,5 +1,6 @@
 package com.prince.video_stream.service;
 
+import com.prince.video_stream.feign.VideoServiceFeignClient;
 import org.springframework.core.io.FileSystemResource;
 
 import org.springframework.core.io.Resource;
@@ -17,7 +18,7 @@ public class StreamVideoServiceImpl implements StreamVideoService{
         this.videoServiceFeignClient = videoServiceFeignClient;
     }
     public Resource getMasterFile(Long videoID, String quality){
-        String path = videoServiceFeignClient.getPath(videoID);
+        String path = videoServiceFeignClient.getVideoPath(videoID).getBody();
         System.out.println(path);
         Path p = Paths.get(path, quality+".m3u8");
         System.out.println(p.toString());
@@ -26,7 +27,7 @@ public class StreamVideoServiceImpl implements StreamVideoService{
         return resource;
     }
     public Resource getMasterFile(Long videoID){
-        String path = videoServiceFeignClient.getPath(videoID);
+        String path = videoServiceFeignClient.getVideoPath(videoID).getBody();
         Path p = Paths.get(path.toString(), "master.m3u8");
         System.out.println(p.toString());
 
@@ -34,7 +35,7 @@ public class StreamVideoServiceImpl implements StreamVideoService{
         return resource;
     }
     public Resource getSegment(Long videoId,String quality, String segment){
-        String path = videoServiceFeignClient.getPath(videoId);
+        String path = videoServiceFeignClient.getVideoPath(videoId).getBody();
         Path p = Paths.get(path.toString()+"/"+quality+"/"+segment+".ts");
         Resource resource = new FileSystemResource(p);
         return resource;

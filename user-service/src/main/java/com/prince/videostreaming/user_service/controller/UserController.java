@@ -27,14 +27,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/me")
-    public ResponseEntity<UserDto> authenticatedUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        User currentUser = (User) authentication.getPrincipal();
-
-        return ResponseEntity.ok(modelMapper.map(currentUser, UserDto.class));
-    }
+//    @GetMapping("/me")
+//    public ResponseEntity<UserDto> authenticatedUser() {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//
+//        User currentUser = (User) authentication.getPrincipal();
+//
+//        return ResponseEntity.ok(modelMapper.map(currentUser, UserDto.class));
+//    }
 
     @GetMapping("/all")
     public ResponseEntity<List<UserDto>> allUsers() {

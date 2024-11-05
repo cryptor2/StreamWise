@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/video")
 public class uploadVideoController {
     private final VideoService videoService;
 
@@ -25,37 +26,35 @@ public class uploadVideoController {
     }
 
 
-    @PostMapping(value = "/upload-video", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<UploadResponseDto> uploadVideo(@RequestPart("uploadVideoDto") UploadVideoDto uploadVideoDto, @RequestPart("file") MultipartFile file) {
         UploadResponseDto res = videoService.saveVideo(uploadVideoDto, file);
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
-    @GetMapping("/all-videos")
+    @GetMapping("/all")
     public ResponseEntity<List<VideoDetailsDto>> getAllVideos() {
         return new ResponseEntity<>(videoService.getAllVideos(), HttpStatus.OK);
     }
 
-    @GetMapping("/videos/course/{courseId}")
+    @GetMapping("/course/{courseId}")
     public ResponseEntity<List<VideoDetailsDto>> getCourseVideos(@PathVariable Long courseId){
         return new ResponseEntity<>(videoService.getCourseVideos(courseId), HttpStatus.OK);
     }
 
-    @GetMapping("/video/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<VideoDetailsDto> getVideoDetail(@PathVariable Long id) {
         return new ResponseEntity<VideoDetailsDto>(videoService.getVideoDetails(id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/video/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteVideo(@PathVariable Long id) {
         return new ResponseEntity<String>("DELETED", HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/video/path/{id}")
+    @GetMapping("/path/{id}")
     public ResponseEntity<String> getVideoPath(@PathVariable Long id) {
         String path = videoService.getPath(id);
         return new ResponseEntity<String>(path, HttpStatus.OK);
     }
-
-
 }

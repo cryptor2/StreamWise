@@ -4,14 +4,14 @@ import com.prince.common.data.dtos.CourseDetailsDto;
 import com.prince.common.data.dtos.CourseDto;
 import com.prince.common.data.dtos.CreateCourseDto;
 import com.prince.common.data.dtos.ResponseInstructorDto;
-import com.prince.common.data.entities.Course;
+
 import com.prince.course.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @RestController
@@ -37,7 +37,7 @@ public class CourseController {
    }
 
 
-    @GetMapping("/all-courses")
+    @GetMapping("/all")
     public ResponseEntity<List<CourseDetailsDto>> getAllCourses(){
         List<CourseDetailsDto> allCourses = courseService.getAllCourses();
         return new ResponseEntity<>(allCourses, HttpStatus.OK);
@@ -59,8 +59,6 @@ public class CourseController {
     @DeleteMapping("/user/{userId}")
     public ResponseEntity<Integer> deleteCourseByUser(@PathVariable Long userId){
         Integer res = courseService.deleteCourseByUser(userId);
-        return new ResponseEntity<Integer>(res, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(res, HttpStatus.NOT_FOUND);
     }
-
-
 }

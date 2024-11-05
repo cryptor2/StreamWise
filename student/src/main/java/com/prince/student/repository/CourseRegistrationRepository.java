@@ -12,7 +12,6 @@ import java.util.List;
 @Repository
 public interface CourseRegistrationRepository extends JpaRepository<CourseRegistration, Long> {
     List<CourseRegistration> findAllByUser(User user);
-
     Integer deleteByUserAndCourse(User user, Course course);
     Integer deleteByUser(User user);
 }
