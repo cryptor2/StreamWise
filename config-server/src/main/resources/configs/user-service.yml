@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8805
 
 spring:
   datasource:
@@ -8,6 +8,8 @@ spring:
     password: 9135
   jpa:
     open-in-view: false
+  main:
+    banner-mode: off
 
 eureka:
   client:

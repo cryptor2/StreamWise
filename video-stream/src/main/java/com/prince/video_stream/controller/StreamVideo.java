@@ -20,6 +20,7 @@ public class StreamVideo{
 
     @GetMapping("/{videoId}/master-file")
     public ResponseEntity<Resource> sendMasterFile(@PathVariable Long videoId){
+
         Resource resource = streamVideoService.getMasterFile(videoId);
         return ResponseEntity.ok()
                 .header(

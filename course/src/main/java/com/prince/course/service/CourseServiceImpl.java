@@ -41,7 +41,9 @@ public class CourseServiceImpl implements CourseService{
     @Override
     @Transactional
     public CourseDetailsDto createCourse(CreateCourseDto createCourseDto) {
-        Course course = modelMapper.map(createCourseDto, Course.class);
+        Course course = new Course();
+        course.setCourseName(createCourseDto.getCourseName());
+        course.setCourseDescription(createCourseDto.getCourseDescription());
         course.setUser(this.getUser(createCourseDto.getUserId()));
         Course response = courseRepository.save(course);
         return modelMapper.map(response, CourseDetailsDto.class);

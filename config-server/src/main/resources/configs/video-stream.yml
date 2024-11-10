@@ -1,5 +1,5 @@
 server:
-  port: 8085
+  port: 8807
 
 spring:
   datasource:
@@ -7,7 +7,6 @@ spring:
     username: root
     password: 9135
   jpa:
-    hibernate:
     open-in-view: false
   main:
     banner-mode: off

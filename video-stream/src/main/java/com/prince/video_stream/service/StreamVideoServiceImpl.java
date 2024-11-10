@@ -27,6 +27,7 @@ public class StreamVideoServiceImpl implements StreamVideoService{
         return resource;
     }
     public Resource getMasterFile(Long videoID){
+
         String path = videoServiceFeignClient.getVideoPath(videoID).getBody();
         Path p = Paths.get(path.toString(), "master.m3u8");
         System.out.println(p.toString());
