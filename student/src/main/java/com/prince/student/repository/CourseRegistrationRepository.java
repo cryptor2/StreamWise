@@ -14,4 +14,5 @@ public interface CourseRegistrationRepository extends JpaRepository<CourseRegist
     List<CourseRegistration> findAllByUser(User user);
     Integer deleteByUserAndCourse(User user, Course course);
     Integer deleteByUser(User user);
+    boolean existsByUserAndCourse(User user, Course course);
 }

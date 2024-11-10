@@ -21,6 +21,12 @@ public class StudentController {
         return new ResponseEntity<>(responseStudentDto, HttpStatus.OK);
     }
 
+    @GetMapping("/check/userId/{userId}/courseId/{coruseId}")
+    public ResponseEntity<Boolean> checkStudentRegisteredACourse(@PathVariable Long userId, @PathVariable Long coruseId){
+        Boolean res = studentService.checkStudentRegisteredACourse(userId, coruseId);
+        return new ResponseEntity<>(true, HttpStatus.OK);
+    }
+
     @PostMapping("/register/userid/{userId}/courseid/{courseId}")
     public ResponseEntity<String> registerCourse(@PathVariable Long userId, @PathVariable Long courseId) {
         String res = studentService.registerCourse(userId, courseId);
