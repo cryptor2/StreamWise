@@ -20,16 +20,16 @@ public class Video {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long videoId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private String videoTitle;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String videoDescription;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 10)
     private String videoFormat;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 150)
     private String videoPath;
 
     @Column(nullable = false)

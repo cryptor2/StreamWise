@@ -20,9 +20,10 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long courseId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String courseName;
 
+    @Column(nullable = false, length = 100)
     private String courseDescription;
 
     @CreationTimestamp
