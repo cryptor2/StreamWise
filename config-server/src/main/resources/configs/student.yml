@@ -2,22 +2,5 @@ server:
   port: 8804
 
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/videoStreaming
-    username: root
-    password: 9135
-  jpa:
-    open-in-view: false
-  main:
-    banner-mode: off
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-  instance:
-    prefer-ip-address: true
-
-logging:
-  level:
-    root: warn
+  config:
+    import: COMMONS/application-common.yml, SECRETS/database_cred.yml
